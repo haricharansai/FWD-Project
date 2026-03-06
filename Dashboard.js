@@ -442,13 +442,18 @@ function attachStaffCreateHandler() {
             return;
         }
 
-        window.GrowClean.saveUser({
+        const saved = window.GrowClean.saveUser({
             username,
             email,
             password,
             role,
             assignedArea: role === 'worker' ? assignedArea : ''
         });
+
+        if (!saved) {
+            if (msg) msg.textContent = 'Only administrators can create a new administrator account.';
+            return;
+        }
 
         if (msg) msg.textContent = `${window.GrowClean.toDisplayRole(role)} account created successfully.`;
         form.reset();

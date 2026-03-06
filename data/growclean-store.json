@@ -171,6 +171,20 @@
   },
   "growclean_login_logs": [
     {
+      "username": "Haricharan",
+      "role": "administrator",
+      "success": false,
+      "note": "Role mismatch",
+      "at": "2026-03-06T13:51:34.882Z"
+    },
+    {
+      "username": "Haricharansai",
+      "role": "administrator",
+      "success": false,
+      "note": "Role mismatch",
+      "at": "2026-03-06T13:51:26.542Z"
+    },
+    {
       "username": "Haricharansai",
       "role": "citizen",
       "success": true,

@@ -33,13 +33,23 @@
             return safeJsonParse(localStorage.getItem(this.usersKey) || '{}', {});
         },
 
-        saveUser(user) {
-            if (!user || !user.username) return;
+        saveUser(user, options) {
+            if (!user || !user.username) return false;
 
             const users = this.getUsers();
             const existing = users[user.username] || {};
             const createdAt = existing.createdAt || new Date().toISOString();
             const role = normalizeRole(user.role || existing.role || 'citizen');
+            const isSystemCreate = Boolean(options && options.system);
+            const isNewUser = !existing.username;
+            const currentUsername = this.getCurrentUser();
+            const currentUserRecord = currentUsername ? this.getUser(currentUsername) : null;
+            const currentUserRole = normalizeRole(currentUserRecord && currentUserRecord.role);
+
+            if (isNewUser && role === 'administrator' && !isSystemCreate && currentUserRole !== 'administrator') {
+                return false;
+            }
+
             const assignedArea = role === 'worker'
                 ? (user.assignedArea || existing.assignedArea || '').trim()
                 : '';
@@ -56,6 +66,7 @@
 
             localStorage.setItem(this.usersKey, JSON.stringify(users));
             this.scheduleSync();
+            return true;
         },
 
         getUser(username) {
@@ -314,7 +325,7 @@
                 }
             ];
 
-            defaults.forEach((u) => this.saveUser(u));
+            defaults.forEach((u) => this.saveUser(u, { system: true }));
         }
     };
 
