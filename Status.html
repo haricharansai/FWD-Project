@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Status</title>
+    <link rel="icon" href="images/public-services-citizens-vector-icon-flat-isolated-eps-illustration-minimal-design-long-shadow-117826086.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&family=Open+Sans:ital,wght@1,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Status.css">
+</head>
+<body>
+    <header>
+        <h1 id="title">Citizen based Public Service Complaint</h1>
+        <h1 id="Heading">Complaint Status Tracker</h1>
+        <nav>
+            
+            
+            <a href="Dashboard.html" id="DashboardNav" style="display:none;">Dashboard</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="status-container">
+            <h2>Track Complaint Status</h2>
+            <p class="subtitle">Enter complaint ID to view updates</p>
+
+            <div class="search-section">
+                <input
+                    type="text"
+                    id="complaintId"
+                    placeholder="Enter Complaint ID (e.g., GC-2026-001)"
+                    class="search-input"
+                >
+                <button id="searchBtn" class="search-btn">Search</button>
+            </div>
+
+            <div id="statusResult" class="status-result" style="display: none;">
+                <div class="complaint-card">
+                    <div class="card-header">
+                        <h3 id="displayComplaintId"></h3>
+                        <span id="statusBadge" class="status-badge"></span>
+                    </div>
+
+                    <div class="complaint-details">
+                        <div class="detail-row">
+                            <label>Category:</label>
+                            <p id="displayCategory"></p>
+                        </div>
+                        <div class="detail-row">
+                            <label>Description:</label>
+                            <p id="displayDescription"></p>
+                        </div>
+                        <div class="detail-row">
+                            <label>Location:</label>
+                            <p id="displayLocation"></p>
+                        </div>
+                        <div class="detail-row">
+                            <label>Date Filed:</label>
+                            <p id="displayDate"></p>
+                        </div>
+                        <div class="detail-row">
+                            <label>Current Status:</label>
+                            <p id="displayStatus"></p>
+                        </div>
+                        <div class="detail-row">
+                            <label>Progress:</label>
+                            <div class="progress-bar">
+                                <div id="progressFill" class="progress-fill"></div>
+                            </div>
+                            <p id="progressText" class="progress-text"></p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-section">
+                        <h4>Status Updates</h4>
+                        <div id="timelineContainer" class="timeline"></div>
+                    </div>
+
+                    <div id="updatePanel" class="update-panel role-panel" data-role="worker,administrator" style="display:none;margin-top:16px;border-top:1px solid #eee;padding-top:12px;">
+                        <h4>Update Complaint (Worker / Administrator)</h4>
+                        <div class="form-row">
+                            <label for="newStatus">Status:</label>
+                            <select id="newStatus">
+                                <option value="pending">Pending</option>
+                                <option value="in-progress">In Progress</option>
+                                <option value="resolved">Resolved</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <label for="newProgress">Progress:</label>
+                            <input type="range" id="newProgress" min="0" max="100" value="0">
+                            <span id="newProgressText">0%</span>
+                        </div>
+                        <div class="form-row">
+                            <label for="updateNote">Update Note:</label>
+                            <textarea id="updateNote" rows="3" placeholder="Describe work done or next steps"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <label for="updatePhoto">Update Photo:</label>
+                            <input type="file" id="updatePhoto" accept="image/*" multiple>
+                        </div>
+                        <p id="updatePhotoHelp" class="small-note">For worker updates, at least one photo is required.</p>
+                        <div id="updatePhotoPreview" class="update-photo-preview"></div>
+                        <div class="form-row">
+                            <button id="saveUpdateBtn">Save Update</button>
+                        </div>
+                        <div id="updateMessage" aria-live="polite" style="margin-top:8px;color:green"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="noResult" class="no-result" style="display: none;">
+                <p>No complaint found with that ID. Please check and try again.</p>
+            </div>
+
+            <div class="sample-info role-panel" data-role="worker,administrator" style="display:none;">
+                <h3>Work Queue</h3>
+                <p>Open pending and in-progress complaints quickly from this queue.</p>
+                <div id="workQueueList"></div>
+                <p style="margin-top:10px;">
+                    <a href="/api/complaints/text" target="_blank" rel="noopener">Open complaint text document</a>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Haricharansai,&nbsp;All rights reserved.</p>
+    </footer>
+
+    <script src="app-common.js"></script>
+    <script src="Status.js"></script>
+    <script>
+        (function () {
+            function getQueryParam(name) {
+                const params = new URLSearchParams(window.location.search);
+                return params.get(name);
+            }
+
+            function normalize(s) {
+                return (s || '').toLowerCase().trim();
+            }
+
+            const qRole = normalize(getQueryParam('role'));
+            const stored = normalize(localStorage.getItem('growclean_role'));
+            const role = qRole || stored || 'guest';
+            const currentUser = localStorage.getItem('growclean_user');
+
+            const dashboardNav = document.getElementById('DashboardNav');
+            if (dashboardNav) {
+                dashboardNav.style.display = currentUser ? '' : 'none';
+            }
+
+            const panels = Array.from(document.querySelectorAll('.role-panel'));
+            panels.forEach((p) => {
+                const allowed = normalize(p.dataset.role);
+                if (!allowed) {
+                    p.style.display = '';
+                    return;
+                }
+                const allowedList = allowed.split(',').map((x) => x.trim());
+                p.style.display = allowedList.includes(role) ? '' : 'none';
+            });
+
+            let el = document.getElementById('roleIndicator');
+            if (!el) {
+                el = document.createElement('div');
+                el.id = 'roleIndicator';
+                el.style.cssText = 'position:fixed;right:12px;bottom:12px;background:#fff;border:1px solid #ddd;padding:6px 10px;border-radius:6px;font-size:13px;box-shadow:0 2px 6px rgba(0,0,0,0.08)';
+                document.body.appendChild(el);
+            }
+            el.textContent = 'Role: ' + role.charAt(0).toUpperCase() + role.slice(1);
+        })();
+    </script>
+</body>
+</html>

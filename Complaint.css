@@ -1,0 +1,240 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(235, 235, 235);
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    color: #333;
+}
+
+header {
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    margin: 10px 0;
+}
+
+header #title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #222;
+}
+
+header #Heading {
+    font-size: 42px;
+    font-weight: 700;
+    color: #222;
+}
+
+nav {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: rgb(24, 66, 173);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+nav a:hover {
+    color: #222;
+}
+
+main {
+    padding: 20px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.complaint-container {
+    background-color: rgb(255, 255, 255);
+    padding: 30px 25px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #222;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1.6px solid #9f9f9f;
+    font-size: 16px;
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="email"]:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: rgb(134, 134, 134);
+    box-shadow: 0 1px 1px 2px rgba(35, 35, 35, 0.2);
+}
+
+textarea {
+    resize: vertical;
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+}
+
+input[type="file"] {
+    padding: 8px 0;
+    cursor: pointer;
+}
+
+small {
+    display: block;
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* Checkbox Group */
+.form-group.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.form-group.checkbox input[type="checkbox"] {
+    width: auto;
+    height: 18px;
+    width: 18px;
+    cursor: pointer;
+    border: 1.6px solid #9f9f9f;
+}
+
+.form-group.checkbox label {
+    margin: 0;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    display: inline;
+}
+
+/* Button Group */
+.button-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+button {
+    flex: 1;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    transition: ease;
+    transition-duration: 0.3s;
+}
+
+.submit-btn {
+    background-color: rgb(9, 8, 8);
+    color: white;
+}
+
+.submit-btn:hover {
+    background-color: white;
+    color: rgb(9, 8, 8);
+    border: 1.5px solid rgb(9, 8, 8);
+}
+
+.reset-btn {
+    background-color: #ddd;
+    color: #222;
+}
+
+.reset-btn:hover {
+    background-color: #bbb;
+    color: white;
+}
+
+/* Footer */
+footer {
+    background-color: rgb(255, 255, 255);
+    color: #222;
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 32px;
+    }
+
+    header #Heading {
+        font-size: 28px;
+    }
+
+    nav {
+        gap: 15px;
+    }
+
+    main {
+        padding: 15px;
+    }
+
+    .complaint-container {
+        padding: 20px;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%;
+    }
+}

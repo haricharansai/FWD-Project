@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="images/public-services-citizens-vector-icon-flat-isolated-eps-illustration-minimal-design-long-shadow-117826086.webp">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&family=Open+Sans:ital,wght@1,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Register.css">
+    <title>Register</title>
+</head>
+<body>
+    <header>
+        <h1 id="title">Citizen based Public Service Complaint</h1>
+        <h1 id="Heading">Create Account</h1>
+        <nav>
+            <a href="Home.html">Home</a>
+            <a href="Login.html">Login</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="Register-Box">
+            <form action="#" method="post" id="registerForm">
+                <label for="Username">Username:</label>
+                <input type="text" id="Username" name="Username" placeholder="Enter your username" required><br><br>
+
+                <label for="Email">Email:</label>
+                <input type="email" id="Email" name="Email" placeholder="Enter your email" required><br><br>
+
+                <label for="Password">Password:</label>
+                <input type="password" id="Password" name="Password" placeholder="Set your password" required><br><br>
+
+                <p style="font-size:14px;color:#444;margin-bottom:14px;">
+                    Public registration is for <strong>Citizen</strong> accounts only.
+                    Worker accounts are created by an Administrator.
+                </p>
+
+                <button type="submit">Register</button>
+            </form>
+            <p id="logi">Already a User?
+                <a href="Login.html">Login here</a>
+            </p>
+            <p id="logi">
+                <a href="Home.html">&larr; Back to Home</a>
+            </p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Haricharansai,&nbsp;All rights reserved.</p>
+    </footer>
+
+    <script src="app-common.js"></script>
+    <script src="Register.js"></script>
+</body>
+</html>

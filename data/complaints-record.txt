@@ -1,0 +1,35 @@
+GrowClean Complaint Records
+Generated: 2026-03-06T09:50:46.481Z
+
+Record 1
+ID: GC-2026-001
+Owner: N/A
+Category: drainage
+Location: House 3
+Status: resolved
+Progress: 100%
+Date Filed: 2026-03-06
+Description: I am facing a drainage problem
+Phone: N/A
+
+Record 2
+ID: GC-2026-002
+Owner: N/A
+Category: garbage
+Location: klhb
+Status: resolved
+Progress: 100%
+Date Filed: 2026-03-06
+Description: My garbage is not yet picked its been A week can you Asap.
+Phone: N/A
+
+Record 3
+ID: GC-2026-003
+Owner: N/A
+Category: electricity
+Location: Nacharam
+Status: in-progress
+Progress: 25%
+Date Filed: 2026-03-06
+Description: electricity
+Phone: N/A

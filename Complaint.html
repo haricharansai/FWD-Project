@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Complaint</title>
+    <link rel="icon" href="images/public-services-citizens-vector-icon-flat-isolated-eps-illustration-minimal-design-long-shadow-117826086.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&family=Open+Sans:ital,wght@1,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Complaint.css">
+</head>
+<body>
+    <header>
+        <h1 id="title">Citizen based Public Service Complaint</h1>
+        <h1 id="Heading">File a Complaint</h1>
+        <nav>
+            <a href="Home.html">Home</a>
+            <a href="Dashboard.html">Dashboard</a>
+            <a href="Status.html">Status</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="complaint-container role-panel" data-role="citizen">
+            <form action="#" method="post" id="complaintForm">
+                <div class="form-group">
+                    <label for="category">Complaint Category:</label>
+                    <select id="category" name="category" required>
+                        <option value="">--Select the type of problem--</option>
+                        <option value="drainage">Drainage</option>
+                        <option value="electricity">Electricity</option>
+                        <option value="sanitation">Sanitation</option>
+                        <option value="garbage">Garbage</option>
+                        <option value="road">Road Damage</option>
+                        <option value="water">Water Supply</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location/Area:</label>
+                    <input type="text" id="location" name="location" placeholder="Enter location or area name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="complaint">Describe Your Complaint:</label>
+                    <textarea id="complaint" name="complaint" rows="6" placeholder="Please provide details about the issue" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your contact number" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="image">Attach Images/Evidence:</label>
+                    <input type="file" id="image" name="image" multiple accept="image/*" aria-describedby="imageHelp">
+                    <small id="imageHelp">You can upload up to 3 images (JPG, PNG, or GIF). Preview shown below.</small>
+                    <div id="imagePreview" aria-live="polite" style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap"></div>
+                </div>
+
+                <div class="form-group checkbox">
+                    <input type="checkbox" id="agree" name="agree" required>
+                    <label for="agree">I confirm that the information provided is true and accurate</label>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="submit-btn" id="submitComplaint">Submit Complaint</button>
+                    <button type="reset" class="reset-btn">Clear Form</button>
+                </div>
+                <div id="formMessage" aria-live="assertive" style="margin-top:10px;color:green"></div>
+            </form>
+        </div>
+
+        <div class="complaint-container role-panel" data-role="worker,administrator" style="display:none;">
+            <h2>Manage Complaints</h2>
+            <p>Workers and administrators can manage complaints via the dashboard.</p>
+            <ul>
+                <li><a href="Dashboard.html">Open Dashboard</a></li>
+                <li><a href="Status.html">View complaint status</a></li>
+            </ul>
+            <p>If you are a citizen and want to file a complaint, select the <strong>Citizen</strong> role on login.</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Haricharansai,&nbsp;All rights reserved.</p>
+    </footer>
+
+    <script src="app-common.js"></script>
+    <script src="Complaint.js"></script>
+    <script>
+        (function () {
+            function getQueryParam(name) {
+                const params = new URLSearchParams(window.location.search);
+                return params.get(name);
+            }
+
+            function normalize(s) {
+                return (s || '').toLowerCase().trim();
+            }
+
+            const qRole = normalize(getQueryParam('role'));
+            const stored = normalize(localStorage.getItem('growclean_role'));
+            const role = qRole || stored || 'guest';
+
+            const panels = Array.from(document.querySelectorAll('.role-panel'));
+            panels.forEach((p) => {
+                const allowed = normalize(p.dataset.role);
+                if (!allowed) {
+                    p.style.display = '';
+                    return;
+                }
+                const allowedList = allowed.split(',').map((x) => x.trim());
+                p.style.display = allowedList.includes(role) ? '' : 'none';
+            });
+
+            let el = document.getElementById('roleIndicator');
+            if (!el) {
+                el = document.createElement('div');
+                el.id = 'roleIndicator';
+                el.style.cssText = 'position:fixed;right:12px;bottom:12px;background:#fff;border:1px solid #ddd;padding:6px 10px;border-radius:6px;font-size:13px;box-shadow:0 2px 6px rgba(0,0,0,0.08)';
+                document.body.appendChild(el);
+            }
+            el.textContent = 'Role: ' + role.charAt(0).toUpperCase() + role.slice(1);
+        })();
+    </script>
+</body>
+</html>

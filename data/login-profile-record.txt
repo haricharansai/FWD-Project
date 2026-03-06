@@ -1,0 +1,65 @@
+GrowClean Login & Profile Records
+Generated: 2026-03-06T09:50:46.481Z
+
+User Profiles
+User 1
+Username: admin1
+Email: admin1@growclean.local
+Role: administrator
+Created: 2026-03-06T03:00:34.110Z
+Last Login: N/A
+
+User 2
+Username: citizen1
+Email: citizen1@growclean.local
+Role: citizen
+Created: 2026-03-06T03:00:34.110Z
+Last Login: N/A
+
+User 3
+Username: Hari
+Email: haricharansai@gmail.com
+Role: administrator
+Created: 2026-03-06T03:23:34.781Z
+Last Login: N/A
+
+User 4
+Username: Haricharan
+Email: haricharan@gmail.com
+Role: worker
+Created: 2026-03-06T03:28:38.856Z
+Last Login: N/A
+
+User 5
+Username: Haricharansai
+Email: haricharansaiinjeti@gmail.com
+Role: citizen
+Created: 2026-03-06T03:01:08.222Z
+Last Login: N/A
+
+User 6
+Username: Karthik
+Email: dasarojukarthik2008@gmail.com
+Role: citizen
+Created: 2026-03-06T09:47:15.231Z
+Last Login: N/A
+
+User 7
+Username: Sriram
+Email: kunapareddysriram2007@gmail.com
+Role: citizen
+Created: 2026-03-06T03:20:16.866Z
+Last Login: N/A
+
+User 8
+Username: worker1
+Email: worker1@growclean.local
+Role: worker
+Created: 2026-03-06T03:00:34.110Z
+Last Login: N/A
+
+Recent Login Attempts
+1. Karthik | administrator | FAILED | 2026-03-06T09:47:33.213Z | Role mismatch
+2. Haricharan | administrator | FAILED | 2026-03-06T03:46:27.452Z | Role mismatch
+3. Haricharansai | citizen | FAILED | 2026-03-06T03:01:16.831Z | Incorrect password
+4. Haricharansai | citizen | FAILED | 2026-03-06T03:00:45.953Z | User not found

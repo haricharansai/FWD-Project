@@ -1,0 +1,203 @@
+{
+  "growclean_users": {
+    "citizen1": {
+      "username": "citizen1",
+      "email": "citizen1@growclean.local",
+      "password": "citizen123",
+      "role": "citizen",
+      "createdAt": "2026-03-06T03:00:34.110Z",
+      "lastLoginAt": "",
+      "assignedArea": ""
+    },
+    "worker1": {
+      "username": "worker1",
+      "email": "worker1@growclean.local",
+      "password": "worker123",
+      "role": "worker",
+      "createdAt": "2026-03-06T03:00:34.110Z",
+      "lastLoginAt": "",
+      "assignedArea": ""
+    },
+    "admin1": {
+      "username": "admin1",
+      "email": "admin1@growclean.local",
+      "password": "admin123",
+      "role": "administrator",
+      "createdAt": "2026-03-06T03:00:34.110Z",
+      "lastLoginAt": "",
+      "assignedArea": ""
+    },
+    "Haricharansai": {
+      "username": "Haricharansai",
+      "email": "haricharansaiinjeti@gmail.com",
+      "password": "123456",
+      "role": "citizen",
+      "createdAt": "2026-03-06T03:01:08.222Z",
+      "lastLoginAt": "",
+      "assignedArea": ""
+    },
+    "Sriram": {
+      "username": "Sriram",
+      "email": "kunapareddysriram2007@gmail.com",
+      "password": "123456",
+      "role": "citizen",
+      "createdAt": "2026-03-06T03:20:16.866Z",
+      "lastLoginAt": "",
+      "assignedArea": ""
+    },
+    "Hari": {
+      "username": "Hari",
+      "email": "haricharansai@gmail.com",
+      "password": "123456",
+      "role": "administrator",
+      "createdAt": "2026-03-06T03:23:34.781Z",
+      "lastLoginAt": "",
+      "assignedArea": ""
+    },
+    "Haricharan": {
+      "username": "Haricharan",
+      "email": "haricharan@gmail.com",
+      "password": "123456",
+      "role": "worker",
+      "createdAt": "2026-03-06T03:28:38.856Z",
+      "lastLoginAt": "",
+      "assignedArea": ""
+    },
+    "Karthik": {
+      "username": "Karthik",
+      "email": "dasarojukarthik2008@gmail.com",
+      "password": "1234567890",
+      "role": "citizen",
+      "assignedArea": "",
+      "createdAt": "2026-03-06T09:47:15.231Z",
+      "lastLoginAt": ""
+    }
+  },
+  "growclean_complaints": {
+    "GC-2026-001": {
+      "id": "GC-2026-001",
+      "category": "drainage",
+      "description": "I am facing a drainage problem",
+      "location": "House 3",
+      "dateFiled": "2026-03-06",
+      "status": "resolved",
+      "progress": 100,
+      "updates": [
+        {
+          "date": "2026-03-06",
+          "text": "Complaint received and registered",
+          "completed": true
+        },
+        {
+          "date": "2026-03-06",
+          "text": "Worker has been alloted and work will start from tommorrow",
+          "completed": false
+        },
+        {
+          "date": "2026-03-06",
+          "text": "done",
+          "completed": true
+        }
+      ]
+    },
+    "GC-2026-002": {
+      "id": "GC-2026-002",
+      "category": "garbage",
+      "description": "My garbage is not yet picked its been A week can you Asap.",
+      "location": "klhb",
+      "dateFiled": "2026-03-06",
+      "status": "resolved",
+      "progress": 100,
+      "updates": [
+        {
+          "date": "2026-03-06",
+          "text": "Complaint received and registered",
+          "completed": true
+        },
+        {
+          "date": "2026-03-06",
+          "text": "noticed given to our incharge will be resolved under 24hrs",
+          "completed": false
+        },
+        {
+          "date": "2026-03-06",
+          "text": "Status updated to In Progress",
+          "completed": false
+        },
+        {
+          "date": "2026-03-06",
+          "text": "Status updated to In Progress",
+          "completed": false
+        },
+        {
+          "date": "2026-03-06",
+          "text": "Status updated to In Progress",
+          "completed": false
+        },
+        {
+          "date": "2026-03-06",
+          "text": "Status updated to Resolved",
+          "completed": true
+        },
+        {
+          "date": "2026-03-06",
+          "text": "Status updated to Resolved",
+          "completed": true
+        }
+      ]
+    },
+    "GC-2026-003": {
+      "id": "GC-2026-003",
+      "category": "electricity",
+      "description": "electricity",
+      "location": "Nacharam",
+      "dateFiled": "2026-03-06",
+      "status": "in-progress",
+      "progress": 25,
+      "updates": [
+        {
+          "date": "2026-03-06",
+          "text": "Complaint received and registered",
+          "completed": true
+        },
+        {
+          "date": "2026-03-06",
+          "text": "in progress",
+          "completed": false,
+          "photos": []
+        }
+      ]
+    }
+  },
+  "growclean_login_logs": [
+    {
+      "username": "Karthik",
+      "role": "administrator",
+      "success": false,
+      "note": "Role mismatch",
+      "at": "2026-03-06T09:47:33.213Z"
+    },
+    {
+      "username": "Haricharan",
+      "role": "administrator",
+      "success": false,
+      "note": "Role mismatch",
+      "at": "2026-03-06T03:46:27.452Z"
+    },
+    {
+      "username": "Haricharansai",
+      "role": "citizen",
+      "success": false,
+      "note": "Incorrect password",
+      "at": "2026-03-06T03:01:16.831Z"
+    },
+    {
+      "username": "Haricharansai",
+      "role": "citizen",
+      "success": false,
+      "note": "User not found",
+      "at": "2026-03-06T03:00:45.953Z"
+    }
+  ],
+  "growclean_next_counter": "4"
+}

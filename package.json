@@ -1,0 +1,12 @@
+{
+  "name": "growclean-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Citizen based public service complaint frontend (HTML/CSS/JS)",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

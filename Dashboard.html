@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&family=Open+Sans:ital,wght@1,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/public-services-citizens-vector-icon-flat-isolated-eps-illustration-minimal-design-long-shadow-117826086.webp">
+    <link rel="stylesheet" href="Dashboard.css">
+</head>
+<body>
+    <header>
+        <img src="images/public-services-citizens-vector-icon-flat-isolated-eps-illustration-minimal-design-long-shadow-117826086.webp" alt="Logo" id="logo">
+        <h1 id="Heading">Welcome to GrowClean</h1>
+        <nav>
+            
+            <div class="logout-profile">
+                <a href="Profile.html" class="dashboard-logout-profile">Profile</a>
+            </div>
+            <div class="logout-profile">
+                <a href="#" class="dashboard-logout-profile" data-logout>Logout</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="dashboard-content">
+            <h2>Dashboard</h2>
+            <p>View and manage complaints based on your role.</p>
+        </div>
+
+        <div id="divMain">
+            <div class="content role-panel" data-role="citizen">
+                <a href="Complaint.html">
+                    <h3>File New Complaint</h3>
+                </a>
+                <p>Submit a complaint with location details.</p>
+            </div>
+            <div class="content role-panel" data-role="citizen">
+                <a href="Status.html">
+                    <h3>My Complaints</h3>
+                </a>
+                <p>View and track complaints you filed.</p>
+            </div>
+
+            <div class="content role-panel" data-role="worker">
+                <a href="Status.html">
+                    <h3>Assigned Tasks</h3>
+                </a>
+                <p>View complaints assigned to you and update status.</p>
+            </div>
+            <div class="content role-panel" data-role="worker">
+                <a href="Status.html">
+                    <h3>Update Complaint</h3>
+                </a>
+                <p>Set complaints to in-progress or resolved.</p>
+            </div>
+
+            <div class="content role-panel" data-role="administrator">
+                <a href="Status.html">
+                    <h3>All Complaints</h3>
+                </a>
+                <p>Manage and reassign complaints.</p>
+            </div>
+            <div class="content role-panel" data-role="administrator">
+                <a href="Dashboard.html?view=analytics#adminAnalytics">
+                    <h3>Admin Analytics</h3>
+                </a>
+                <p>View system-level counts and activity.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Haricharansai,&nbsp;All rights reserved.</p>
+    </footer>
+
+    <script src="app-common.js"></script>
+    <script src="Dashboard.js"></script>
+    <script src="logout.js"></script>
+    <script>
+        (function () {
+            function getQueryParam(name) {
+                const params = new URLSearchParams(window.location.search);
+                return params.get(name);
+            }
+
+            function normalize(s) {
+                return (s || '').toLowerCase().trim();
+            }
+
+            const currentUser = localStorage.getItem('growclean_user');
+            if(!currentUser){
+                window.location.href = 'Login.html';
+                return;
+            }
+
+            const qRole = normalize(getQueryParam('role'));
+            const stored = normalize(localStorage.getItem('growclean_role'));
+            const users = JSON.parse(localStorage.getItem('growclean_users') || '{}');
+            const userRole = normalize(users[currentUser] && users[currentUser].role);
+            const role = qRole || stored || userRole || 'citizen';
+
+            const panels = Array.from(document.querySelectorAll('.role-panel'));
+            panels.forEach((p) => {
+                const allowed = normalize(p.dataset.role);
+                if (!allowed) {
+                    p.style.display = '';
+                    return;
+                }
+                const allowedList = allowed.split(',').map((x) => x.trim());
+                p.style.display = allowedList.includes(role) ? '' : 'none';
+            });
+
+            let el = document.getElementById('roleIndicator');
+            if (!el) {
+                el = document.createElement('div');
+                el.id = 'roleIndicator';
+                el.style.cssText = 'position:fixed;right:12px;bottom:12px;background:#fff;border:1px solid #ddd;padding:6px 10px;border-radius:6px;font-size:13px;box-shadow:0 2px 6px rgba(0,0,0,0.08)';
+                document.body.appendChild(el);
+            }
+            el.textContent = 'Role: ' + role.charAt(0).toUpperCase() + role.slice(1);
+        })();
+    </script>
+</body>
+</html>

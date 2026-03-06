@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    
+    background-color: rgb(235, 235, 235);
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    color: #333;
+}
+
+header {
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    margin: 10px 0;
+}
+
+header #title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #222;
+}
+
+header #Heading {
+    font-size: 42px;
+    font-weight: 700;
+    color: #222;
+}
+
+nav {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: rgb(24, 66, 173);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+nav a:hover {
+    color: #222;
+}
+
+main {
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Main content */
+.details {
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    line-height: 1.8;
+}
+
+.details div {
+    background-color: white;
+    padding: 30px 25px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.details h2 {
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #222;
+    font-size: 22px;
+}
+
+.details p {
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.details ul,
+.details ol {
+    margin-left: 20px;
+    color: #333;
+}
+
+.details li {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+/* Footer */
+footer {
+    background-color: rgb(255, 255, 255);
+    color: #222;
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 32px;
+    }
+
+    header #Heading {
+        font-size: 28px;
+    }
+
+    nav {
+        gap: 15px;
+    }
+
+    main {
+        padding: 15px;
+    }
+
+    .details div {
+        padding: 20px;
+    }
+}

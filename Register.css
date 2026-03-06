@@ -1,0 +1,159 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(235, 235, 235);
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+}
+
+header {
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    margin: 10px 0;
+}
+
+header #title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #222;
+}
+
+header #Heading {
+    font-size: 42px;
+    font-weight: 700;
+    color: #222;
+}
+
+nav {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: rgb(24, 66, 173);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+nav a:hover {
+    color: #222;
+}
+
+main {
+    padding: 20px;
+}
+
+footer {
+    background-color: rgb(255, 255, 255);
+    color: #222;
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+.Register-Box {
+    max-width: 500px;
+    margin: 100px auto;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 30px 25px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+
+
+
+
+h2 {
+    font-weight: 700;
+    font-size: 42px;
+    margin-bottom: 25px;
+    color: #222;
+}
+
+
+label {
+    display: block;
+    font-size: 18px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-bottom: 6px;
+    text-align: left;
+}
+
+
+input,
+select {
+    width: 80%;
+    padding: 12px;
+    margin-bottom: 18px;
+    border-radius: 6px;
+    border: 1.6px solid #9f9f9f;
+    font-size: 16px;
+    align-self:center;
+    
+}
+#Username{
+    text-transform: capitalize;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: rgb(134, 134, 134);
+    box-shadow: 0 1px 1px 2px rgba(35, 35, 35, 0.2);
+}
+
+
+
+option {
+    font-weight: 400; 
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+}
+button {
+    background-color: rgb(9, 8, 8);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 18px;
+    border-radius: 6px;
+    cursor:pointer;
+    font-family: 'Montserrat', sans-serif;
+}
+button:hover{
+    background-color: white;
+    color:black;
+    transition:ease;
+    transition-duration: 0.3s;
+}
+
+#logi{
+        font-weight: 900;
+}
+#logi a{
+    text-decoration: none;
+    color: rgb(24, 66, 173);
+}

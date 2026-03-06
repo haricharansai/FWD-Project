@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="images/public-services-citizens-vector-icon-flat-isolated-eps-illustration-minimal-design-long-shadow-117826086.webp">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&family=Open+Sans:ital,wght@1,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Login.css">
+    <title>Login</title>
+</head>
+<body>
+    <div class="Login-Box">
+        <section>
+            <h2>Login</h2>
+            <form action="#" method="post" id="loginForm">
+                <label for="Username">Username:</label>
+                <input name="Username" id="Username" type="text" placeholder="Enter your username" required><br><br>
+
+                <label for="Password">Password:</label>
+                <input name="Password" id="Password" type="password" placeholder="Enter your password" required>
+                <p class="forgot"><a href="#">Forgot password?</a></p>
+
+                <label for="role">Role:</label>
+                <select id="role" name="role" required>
+                    <option value="">--Select Option--</option>
+                    <option value="Citizen">Citizen</option>
+                    <option value="Worker">Worker</option>
+                    <option value="Administrator">Administrator</option>
+                </select><br><br>
+
+                <button class="login" id="login" type="submit">Login</button>
+                <button type="reset">Reset</button>
+            </form>
+        </section>
+        <p class="regis">New user?
+            <a href="Register.html">Register here</a>
+        </p>
+        <p class="regis">
+            <a href="Home.html">&larr; Back to Home</a>
+        </p>
+    </div>
+    <script src="app-common.js"></script>
+    <script src="Login.js"></script>
+</body>
+</html>
