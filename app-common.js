@@ -189,6 +189,15 @@
             };
         },
 
+        hasLocalData() {
+            const snapshot = this.getSnapshot();
+            return (
+                Object.keys(snapshot[this.usersKey] || {}).length > 0 ||
+                Object.keys(snapshot[this.complaintsKey] || {}).length > 0 ||
+                (Array.isArray(snapshot[this.loginLogKey]) && snapshot[this.loginLogKey].length > 0)
+            );
+        },
+
         applySnapshot(snapshot) {
             if (!snapshot || typeof snapshot !== 'object') return;
 
@@ -233,6 +242,9 @@
 
         async hydrateFromStaticSeed() {
             try {
+                // On static hosts, do not overwrite existing browser data on every page load.
+                if (this.hasLocalData()) return true;
+
                 const response = await fetch('/data/growclean-store.json', { cache: 'no-store' });
                 if (!response.ok) return false;
 

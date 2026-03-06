@@ -2,8 +2,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('registerForm');
     if (!form) return;
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
+
+        if (window.GrowClean && window.GrowClean.ready) {
+            try {
+                await window.GrowClean.ready;
+            } catch (_error) {
+                // Continue with localStorage fallback.
+            }
+        }
 
         const username = document.getElementById('Username').value.trim();
         const email = document.getElementById('Email').value.trim().toLowerCase();
