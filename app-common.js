@@ -27,6 +27,7 @@
         loginLogKey: 'growclean_login_logs',
         syncTimer: null,
         ready: null,
+        hasWritableServerStore: true,
 
         getUsers() {
             return safeJsonParse(localStorage.getItem(this.usersKey) || '{}', {});
@@ -197,6 +198,31 @@
         async hydrateFromServer() {
             try {
                 const response = await fetch('/api/store', { cache: 'no-store' });
+                if (!response.ok) {
+                    this.hasWritableServerStore = false;
+                    return this.hydrateFromStaticSeed();
+                }
+
+                const snapshot = await response.json();
+                const hasData = snapshot && (
+                    Object.keys(snapshot[this.usersKey] || {}).length > 0 ||
+                    Object.keys(snapshot[this.complaintsKey] || {}).length > 0 ||
+                    (Array.isArray(snapshot[this.loginLogKey]) && snapshot[this.loginLogKey].length > 0)
+                );
+
+                if (!hasData) return false;
+                this.applySnapshot(snapshot);
+                this.hasWritableServerStore = true;
+                return true;
+            } catch (_error) {
+                this.hasWritableServerStore = false;
+                return this.hydrateFromStaticSeed();
+            }
+        },
+
+        async hydrateFromStaticSeed() {
+            try {
+                const response = await fetch('/data/growclean-store.json', { cache: 'no-store' });
                 if (!response.ok) return false;
 
                 const snapshot = await response.json();
@@ -215,6 +241,7 @@
         },
 
         async persistToServer() {
+            if (!this.hasWritableServerStore) return;
             try {
                 await fetch('/api/store', {
                     method: 'POST',
@@ -222,6 +249,7 @@
                     body: JSON.stringify(this.getSnapshot())
                 });
             } catch (_error) {
+                this.hasWritableServerStore = false;
                 // Keep localStorage as fallback when server is unavailable.
             }
         },

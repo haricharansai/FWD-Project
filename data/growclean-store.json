@@ -32,9 +32,9 @@
       "email": "haricharansaiinjeti@gmail.com",
       "password": "123456",
       "role": "citizen",
+      "assignedArea": "",
       "createdAt": "2026-03-06T03:01:08.222Z",
-      "lastLoginAt": "",
-      "assignedArea": ""
+      "lastLoginAt": ""
     },
     "Sriram": {
       "username": "Sriram",
@@ -170,6 +170,13 @@
     }
   },
   "growclean_login_logs": [
+    {
+      "username": "Haricharansai",
+      "role": "citizen",
+      "success": true,
+      "note": "Password reset successful",
+      "at": "2026-03-06T13:40:54.317Z"
+    },
     {
       "username": "Karthik",
       "role": "administrator",

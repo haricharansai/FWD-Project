@@ -98,11 +98,9 @@
                 return;
             }
 
-            const qRole = normalize(getQueryParam('role'));
-            const stored = normalize(localStorage.getItem('growclean_role'));
             const users = JSON.parse(localStorage.getItem('growclean_users') || '{}');
             const userRole = normalize(users[currentUser] && users[currentUser].role);
-            const role = qRole || stored || userRole || 'citizen';
+            const role = userRole || 'citizen';
 
             const panels = Array.from(document.querySelectorAll('.role-panel'));
             panels.forEach((p) => {

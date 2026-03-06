@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const roleFromStorage = window.GrowClean && window.GrowClean.getRole ? window.GrowClean.getRole() : '';
     const roleFromQuery = new URLSearchParams(window.location.search).get('role') || '';
-    const role = (roleFromStorage || roleFromQuery || currentUserRecord.role || 'citizen').toLowerCase();
+    const role = (currentUserRecord.role || roleFromStorage || roleFromQuery || 'citizen').toLowerCase();
     if (window.GrowClean && window.GrowClean.setRole) {
         window.GrowClean.setRole(role);
     }
@@ -166,8 +166,8 @@ function renderAdminRecords(container, allComplaints) {
         ${renderAdminAnalytics(allComplaints)}
         <h2>User Credential Records (Administrator Only)</h2>
         ${renderUsersTable(users)}
-        <h3>Create Worker Account</h3>
-        ${renderWorkerForm()}
+        <h3>Create Staff Account</h3>
+        ${renderStaffCreateForm()}
         <h3>Edit Worker Details</h3>
         ${renderWorkerEditForm(users)}
         <h3>Complaint Summary</h3>
@@ -182,7 +182,7 @@ function renderAdminRecords(container, allComplaints) {
     `;
 
     container.parentNode.appendChild(wrap);
-    attachWorkerCreateHandler();
+    attachStaffCreateHandler();
     attachWorkerEditHandler();
     autoScrollAnalytics();
 }
@@ -316,23 +316,29 @@ function renderUsersTable(users) {
     `;
 }
 
-function renderWorkerForm() {
+function renderStaffCreateForm() {
     return `
-        <form id="createWorkerForm" class="admin-worker-form">
-            <label for="workerUsername">Username</label>
-            <input id="workerUsername" type="text" required>
+        <form id="createStaffForm" class="admin-worker-form">
+            <label for="staffRole">Role</label>
+            <select id="staffRole" required>
+                <option value="worker">Worker</option>
+                <option value="administrator">Administrator</option>
+            </select>
 
-            <label for="workerEmail">Email</label>
-            <input id="workerEmail" type="email" required>
+            <label for="staffUsername">Username</label>
+            <input id="staffUsername" type="text" required>
 
-            <label for="workerPassword">Password</label>
-            <input id="workerPassword" type="password" minlength="6" required>
+            <label for="staffEmail">Email</label>
+            <input id="staffEmail" type="email" required>
 
-            <label for="workerArea">Assigned Area / Location</label>
-            <input id="workerArea" type="text" required>
+            <label for="staffPassword">Password</label>
+            <input id="staffPassword" type="password" minlength="6" required>
 
-            <button type="submit">Create Worker</button>
-            <p id="workerCreateMessage" class="form-message"></p>
+            <label for="staffArea">Assigned Area / Location (Worker only)</label>
+            <input id="staffArea" type="text" placeholder="Required only for Worker">
+
+            <button type="submit">Create Account</button>
+            <p id="staffCreateMessage" class="form-message"></p>
         </form>
     `;
 }
@@ -363,21 +369,63 @@ function renderWorkerEditForm(users) {
     `;
 }
 
-function attachWorkerCreateHandler() {
-    const form = document.getElementById('createWorkerForm');
+function attachStaffCreateHandler() {
+    const form = document.getElementById('createStaffForm');
     if (!form) return;
+
+    const roleInput = document.getElementById('staffRole');
+    const areaInput = document.getElementById('staffArea');
+
+    function syncAreaRequirement() {
+        if (!roleInput || !areaInput) return;
+        const selectedRole = (roleInput.value || '').toLowerCase();
+        areaInput.required = selectedRole === 'worker';
+        if (selectedRole !== 'worker') {
+            areaInput.value = '';
+        }
+    }
+
+    if (roleInput) {
+        roleInput.addEventListener('change', syncAreaRequirement);
+    }
+    syncAreaRequirement();
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const username = document.getElementById('workerUsername').value.trim();
-        const email = document.getElementById('workerEmail').value.trim().toLowerCase();
-        const password = document.getElementById('workerPassword').value;
-        const assignedArea = document.getElementById('workerArea').value.trim();
-        const msg = document.getElementById('workerCreateMessage');
+        const currentUser = window.GrowClean.getCurrentUser ? window.GrowClean.getCurrentUser() : '';
+        const currentUserRecord = currentUser ? window.GrowClean.getUser(currentUser) : null;
+        const currentRole = (currentUserRecord && currentUserRecord.role ? currentUserRecord.role : '').toLowerCase();
+        const msg = document.getElementById('staffCreateMessage');
 
-        if (!username || !email || !password || !assignedArea) {
+        if (currentRole !== 'administrator') {
+            if (msg) msg.textContent = 'Only administrators can create worker/administrator accounts.';
+            return;
+        }
+
+        const role = roleInput ? roleInput.value.toLowerCase().trim() : '';
+        const username = document.getElementById('staffUsername').value.trim();
+        const email = document.getElementById('staffEmail').value.trim().toLowerCase();
+        const password = document.getElementById('staffPassword').value;
+        const assignedArea = areaInput ? areaInput.value.trim() : '';
+
+        if (!role || !username || !email || !password) {
             if (msg) msg.textContent = 'Please fill all fields.';
+            return;
+        }
+
+        if (password.length < 6) {
+            if (msg) msg.textContent = 'Password must be at least 6 characters.';
+            return;
+        }
+
+        if (!['worker', 'administrator'].includes(role)) {
+            if (msg) msg.textContent = 'Invalid role selected.';
+            return;
+        }
+
+        if (role === 'worker' && !assignedArea) {
+            if (msg) msg.textContent = 'Assigned area is required for worker accounts.';
             return;
         }
 
@@ -398,12 +446,13 @@ function attachWorkerCreateHandler() {
             username,
             email,
             password,
-            role: 'worker',
-            assignedArea
+            role,
+            assignedArea: role === 'worker' ? assignedArea : ''
         });
 
-        if (msg) msg.textContent = 'Worker account created successfully.';
+        if (msg) msg.textContent = `${window.GrowClean.toDisplayRole(role)} account created successfully.`;
         form.reset();
+        syncAreaRequirement();
         setTimeout(() => {
             window.location.reload();
         }, 500);
@@ -439,6 +488,14 @@ function attachWorkerEditHandler() {
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
+
+        const currentUser = window.GrowClean.getCurrentUser ? window.GrowClean.getCurrentUser() : '';
+        const currentUserRecord = currentUser ? window.GrowClean.getUser(currentUser) : null;
+        const currentRole = (currentUserRecord && currentUserRecord.role ? currentUserRecord.role : '').toLowerCase();
+        if (currentRole !== 'administrator') {
+            if (msg) msg.textContent = 'Only administrators can edit worker accounts.';
+            return;
+        }
 
         const username = select && select.value ? select.value : '';
         if (!username) {

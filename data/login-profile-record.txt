@@ -1,5 +1,5 @@
 GrowClean Login & Profile Records
-Generated: 2026-03-06T09:50:46.481Z
+Generated: 2026-03-06T13:41:04.211Z
 
 User Profiles
 User 1
@@ -59,7 +59,8 @@ Created: 2026-03-06T03:00:34.110Z
 Last Login: N/A
 
 Recent Login Attempts
-1. Karthik | administrator | FAILED | 2026-03-06T09:47:33.213Z | Role mismatch
-2. Haricharan | administrator | FAILED | 2026-03-06T03:46:27.452Z | Role mismatch
-3. Haricharansai | citizen | FAILED | 2026-03-06T03:01:16.831Z | Incorrect password
-4. Haricharansai | citizen | FAILED | 2026-03-06T03:00:45.953Z | User not found
+1. Haricharansai | citizen | SUCCESS | 2026-03-06T13:40:54.317Z | Password reset successful
+2. Karthik | administrator | FAILED | 2026-03-06T09:47:33.213Z | Role mismatch
+3. Haricharan | administrator | FAILED | 2026-03-06T03:46:27.452Z | Role mismatch
+4. Haricharansai | citizen | FAILED | 2026-03-06T03:01:16.831Z | Incorrect password
+5. Haricharansai | citizen | FAILED | 2026-03-06T03:00:45.953Z | User not found
