@@ -1,3 +1,4 @@
+
 // Clears auth session and redirects to Home.
 function logout() {
     try {
